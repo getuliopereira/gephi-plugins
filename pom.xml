@@ -21,13 +21,15 @@
         <gephi.version>0.9.1</gephi.version>
         <clusters.path>${project.build.directory}/plugins_clusters</clusters.path>
         <github.global.server>github</github.global.server>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
     
     <!-- SCM -->
     <scm>
-        <connection>scm:git:git://github.com/gephi/gephi-plugins.git</connection>
-        <developerConnection>scm:git:git@github.com:gephi/gephi-plugins.git</developerConnection>
-        <url>https://github.com/gephi/gephi-plugins</url>
+        <connection>scm:git:git://github.com/getuliopereira/gephi-plugins.git</connection>
+        <developerConnection>scm:git:git@github.com:getuliopereira/gephi-plugins.git</developerConnection>
+        <url>https://github.com/getuliopereira/gephi-plugins</url>
     </scm>
 
     <!-- Repositories -->
