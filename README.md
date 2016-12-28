@@ -102,3 +102,4 @@ To debug Gephi with your plugin, right click on the `gephi-plugins` project and 
 * <https://github.com/gephi/gephi/wiki/Plugin-Quick-Start>
 * <https://github.com/gephi/gephi/wiki/Import>
 * <https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet>
+* <https://git-scm.com/book/pt-br/v1/Primeiros-passos>
