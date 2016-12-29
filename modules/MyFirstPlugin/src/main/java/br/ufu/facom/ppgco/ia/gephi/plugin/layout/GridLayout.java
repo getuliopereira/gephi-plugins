@@ -1,4 +1,4 @@
-package org.gephi.plugins.example.layout;
+package br.ufu.facom.ppgco.ia.gephi.plugin.layout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,7 @@ import org.gephi.layout.spi.Layout;
 import org.gephi.layout.spi.LayoutBuilder;
 import org.gephi.layout.spi.LayoutProperty;
 import org.openide.util.Exceptions;
+import org.openide.util.NbBundle;
 
 public class GridLayout implements Layout {
 
@@ -27,6 +28,9 @@ public class GridLayout implements Layout {
         this.builder = builder;
     }
 
+    /**
+     * Atribui valores default aos atributos do layout.
+     */
     @Override
     public void resetPropertiesValues() {
         areaSize = 1000;
@@ -38,20 +42,27 @@ public class GridLayout implements Layout {
         executing = true;
     }
 
+    /**
+     * Executa o algoritmo de layout
+     */
     @Override
     public void goAlgo() {
+        
         Graph graph = graphModel.getGraphVisible();
+        
         graph.readLock();
+        
         int nodeCount = graph.getNodeCount();
         Node[] nodes = graph.getNodes().toArray();
 
         int rows = (int) Math.round(Math.sqrt(nodeCount)) + 1;
         int cols = (int) Math.round(Math.sqrt(nodeCount)) + 1;
+        
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols && (i * rows + j) < nodes.length; j++) {
                 Node node = nodes[i * rows + j];
                 float x = (-areaSize / 2f) + ((float) j / cols) * areaSize;
-                float y = (areaSize / 2f) - ((float) i / rows) * areaSize;
+                float y = ( areaSize / 2f) - ((float) i / rows) * areaSize;
                 float px = node.x();
                 float py = node.y();
                 node.setX(px + (x - px) * (speed / 10000f));
@@ -72,24 +83,37 @@ public class GridLayout implements Layout {
         return executing;
     }
 
+    /**
+     * Obtem os valores das propriedades da rede inseridas pelo usuário.
+     * 
+     * @return 
+     */
     @Override
     public LayoutProperty[] getProperties() {
         List<LayoutProperty> properties = new ArrayList<>();
-        final String GRIDLAYOUT = "Grid Layout";
+        final String GRIDLAYOUT = NbBundle.getMessage(getClass(), "GridLayout.name");
 
         try {
             properties.add(LayoutProperty.createProperty(
-                    this, Integer.class,
-                    "Area size",
+                    this, 
+                    Integer.class,
+                    NbBundle.getMessage(getClass(), "GridLayout.areaSize.name"),
                     GRIDLAYOUT,
-                    "The area size",
-                    "getAreaSize", "setAreaSize"));
+                    NbBundle.getMessage(getClass(), "GridLayout.areaSize.desc"),
+                    "getAreaSize", 
+                    "setAreaSize")
+            );
+            
             properties.add(LayoutProperty.createProperty(
-                    this, Float.class,
-                    "Speed",
+                    this, 
+                    Float.class,
+                    NbBundle.getMessage(getClass(), "GridLayout.speed.name"),
                     GRIDLAYOUT,
-                    "How fast are moving nodes",
-                    "getSpeed", "setSpeed"));
+                    NbBundle.getMessage(getClass(), "GridLayout.speed.desc"),
+                    "getSpeed", 
+                    "setSpeed")
+            );
+            
         } catch (Exception e) {
             Exceptions.printStackTrace(e);
         }
@@ -107,6 +131,8 @@ public class GridLayout implements Layout {
         this.graphModel = graphModel;
     }
 
+    // getters e setters
+    
     public Float getSpeed() {
         return speed;
     }

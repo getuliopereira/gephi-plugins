@@ -1,2 +1,2 @@
 Manifest-Version: 1.0
-OpenIDE-Module-Localizing-Bundle: org/gephi/plugins/example/layout/Bundle.properties
+OpenIDE-Module-Localizing-Bundle: br/ufu/facom/ppgco/ia/gephi/plugin/layout/Bundle.properties
